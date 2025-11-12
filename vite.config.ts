@@ -1,7 +1,9 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// https://vite.dev/config/
+// Замените на имя вашего репозитория
+const repoName = 'TaskLite';
+
 export default defineConfig({
   plugins: [
     react({
@@ -10,4 +12,6 @@ export default defineConfig({
       },
     }),
   ],
+  // Важно для GitHub Pages
+  base: `/${repoName}/`,
 })
