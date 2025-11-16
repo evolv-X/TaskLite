@@ -10,7 +10,7 @@ type ButtonProp = {
 };
 
 const StyledButton = styled.button<{ active: string, filter: string}>`
-    padding: ${p => p.theme.spacing(1)} ${p => p.theme.spacing(3)};
+    padding: ${p => p.theme.spacing(1)} ${p => p.theme.spacing(2)};
     border: none;
     border-radius: ${p => p.theme.radius.md};
     color: ${p => (p.active === p.filter ? p.theme.colors.background : p.theme.colors.text)};

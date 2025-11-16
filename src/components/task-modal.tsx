@@ -1,12 +1,79 @@
 import { useEffect, useRef, useState } from "react";
 import type { Task } from "../entitites/task";
 import { isValidTaskTitle, normalizeTitle } from "../utils/validation";
+import styled from "@emotion/styled";
 
 type TaskModalProps = {
   task: Task;
   onSave: (task: Task) => void;
   onClose: () => void;
 };
+
+export const ModalOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  background: rgba(0, 0, 0, 0.4);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 9999;
+
+  opacity: 1;
+  transition: opacity 0.3s ease;
+`;
+
+export const CardWrapper = styled.div`
+  background: rgb(250, 250, 250);
+  padding: 24px;
+  border-radius: 6px;
+  width: 400px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 12px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  opacity: 1;
+  transform: scale(1);
+  transition: transform 0.3s, opacity 0.3s;
+`;
+
+const ModalButton = styled.button`
+    padding: ${p => p.theme.spacing(1)} ${p => p.theme.spacing(2)};
+    border: none;
+    border-radius: ${p => p.theme.radius.md};
+    color: ${p => p.theme.colors.text};
+    background: ${p => p.theme.colors.background};
+    cursor: pointer;
+    transition: background 0.2s ease;
+    font-weight: ${p => p.theme.font.weight.medium};
+`
+
+const ModalButtonAccent = styled.button`
+    padding: ${p => p.theme.spacing(1)} ${p => p.theme.spacing(2)};
+    border: none;
+    border-radius: ${p => p.theme.radius.md};
+    color: ${p => p.theme.colors.background};
+    background: ${p => p.theme.colors.accent};
+    cursor: pointer;
+    transition: background 0.2s ease;
+    font-weight: ${p => p.theme.font.weight.medium};
+    &:hover{
+        background: ${p => p.theme.colors.accentHover};
+    }
+`
+
+export const WrapperEnd = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+`;
 
 export default function TaskModal(props: TaskModalProps) {
   const [title, setTitle] = useState(props.task.title);
@@ -37,8 +104,8 @@ export default function TaskModal(props: TaskModalProps) {
   }, [props]);
 
   return (
-    <div ref={modalRef}>
-      <div>
+    <ModalOverlay>
+      <CardWrapper ref={modalRef}>
         <h2>Редактирование задачи</h2>
         <input
           onChange={(e) => setTitle(e.target.value)}
@@ -49,14 +116,18 @@ export default function TaskModal(props: TaskModalProps) {
           onChange={(e) => setDescription(e.target.value)}
           value={description}
         />
-        <input
-          type="date"
-          value={deadline}
-          onChange={(e) => setDeadline(e.target.value)}
-        />
-        <div>
-          <button onClick={() => props.onClose()}>Отмена</button>
-          <button
+        <label>
+          Дедлайн:
+          <input
+            type="date"
+            value={deadline}
+            onChange={(e) => setDeadline(e.target.value)}
+          />
+        </label>
+
+        <WrapperEnd>
+          <ModalButton onClick={() => props.onClose()}>Отмена</ModalButton>
+          <ModalButtonAccent
             onClick={() => {
               if (isValidTaskTitle(title)) {
                 let editTask = props.task;
@@ -68,9 +139,9 @@ export default function TaskModal(props: TaskModalProps) {
             }}
           >
             Сохранить
-          </button>
-        </div>
-      </div>
-    </div>
+          </ModalButtonAccent>
+        </WrapperEnd>
+      </CardWrapper>
+    </ModalOverlay>
   );
 }

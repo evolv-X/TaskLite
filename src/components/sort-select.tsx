@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 export const StyledSelect = styled.select`
-  padding: ${p => p.theme.spacing(1)} ${p => p.theme.spacing(3)};
+  padding: ${p => p.theme.spacing(1)} ${p => p.theme.spacing(1)};
   border: none;
   border-radius: ${p => p.theme.radius.md};
   color: ${p => p.theme.colors.text};
@@ -13,6 +13,7 @@ export const StyledSelect = styled.select`
 
   &:hover {
     background: ${p => p.theme.colors.surface};
+    box-shadow: 0 0 0 2px ${p => p.theme.colors.accent};
   }
 
   &:focus {

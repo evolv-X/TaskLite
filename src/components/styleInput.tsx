@@ -8,12 +8,13 @@ type InputProp = {
 };
 
 const StyledInput = styled.input`
-  padding: ${(p) => p.theme.spacing(1)} ${(p) => p.theme.spacing(3)};
-  border: solid 3px ${(p) => p.theme.colors.border};
+  padding: ${(p) => p.theme.spacing(1)} ${(p) => p.theme.spacing(1)};
+  border: solid 1px ${(p) => p.theme.colors.border};
   border-radius: ${(p) => p.theme.radius.md};
   color: ${(p) => p.theme.colors.textMuted};
   background: ${(p) => p.theme.colors.background};
   cursor: pointer;
+  width: 100%;
   transition: background 0.2s ease;
   font-weight: ${(p) => p.theme.font.weight.medium};
   &:hover {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button } from "../Button";
+import { Button } from "../components/Button";
 import { Input } from "../components/styleInput";
 import { TasksList } from "../components/tasks-list";
 import { newTask, type Task } from "../entitites/task";
@@ -11,6 +11,7 @@ import ProgressBar from "../components/task-progress";
 import { FButton } from "../components/filter-button";
 import { StyledSelect } from "../components/sort-select";
 import { TrimButton } from "../components/trim-button";
+import { MainDiv, SortGap, SortRow, Titleh1 } from "../components/wrapers";
 
 export function TasksPage() {
   const [text, setText] = useState("");
@@ -112,32 +113,46 @@ export function TasksPage() {
         });
 
   return (
-    <div>
+    <MainDiv>
+      <Titleh1>TaskLite</Titleh1>
+      <SortGap>
+        <Input
+          type="text"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          placeholder="Введите задачу"
+        />
+        <Button text="Добавить" onClick={handleAddTask} />
+      </SortGap>
+
       <Input
+        value={query}
         type="text"
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        placeholder="Введите текст"
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Поиск задач..."
       />
-      <div>
-        <FButton
-          text="Все"
-          active={"all"}
-          filter={filter}
-          onClick={() => setFilter("all")}
-        />
-        <FButton
-          text="Активные"
-          active={"active"}
-          filter={filter}
-          onClick={() => setFilter("active")}
-        />
-        <FButton
-          text="Завершённые"
-          active={"completed"}
-          filter={filter}
-          onClick={() => setFilter("completed")}
-        />
+      <SortRow>
+        <SortGap>
+          <FButton
+            text="Все"
+            active={"all"}
+            filter={filter}
+            onClick={() => setFilter("all")}
+          />
+          <FButton
+            text="Активные"
+            active={"active"}
+            filter={filter}
+            onClick={() => setFilter("active")}
+          />
+          <FButton
+            text="Завершённые"
+            active={"completed"}
+            filter={filter}
+            onClick={() => setFilter("completed")}
+          />
+        </SortGap>
+
         <StyledSelect
           value={sortOrder}
           onChange={(e) =>
@@ -148,14 +163,7 @@ export function TasksPage() {
           <option value="newest">Сначала новые</option>
           <option value="oldest">Сначала старые</option>
         </StyledSelect>
-      </div>
-      <Button text="Добавить" onClick={handleAddTask} />
-
-      <input
-        value={query}
-        type="text"
-        onChange={(e) => setQuery(e.target.value)}
-      />
+      </SortRow>
 
       <ProgressBar percent={percent} />
 
@@ -166,12 +174,14 @@ export function TasksPage() {
         onComplete={handleComplete}
       />
 
-      <p>
-        Всего: {total} | Активных: {total - completed} | Выполненных:{" "}
-        {completed}
-      </p>
+      <SortRow>
+        <p>
+          Всего: {total} | Активных: {total - completed} | Выполненных:{" "}
+          {completed}
+        </p>
 
-      <TrimButton text="Отчистить выполненные" onClick={trimCompletedTask} />
+        <TrimButton text="Отчистить выполненные" onClick={trimCompletedTask} />
+      </SortRow>
 
       {editingTask && (
         <TaskModal
@@ -180,6 +190,7 @@ export function TasksPage() {
           onClose={handleClose}
         />
       )}
-    </div>
+    </MainDiv>
   );
 }
+1;

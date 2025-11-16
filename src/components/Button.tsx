@@ -6,7 +6,7 @@ type ButtonProp = {
 };
 
 const StyledButton = styled.button`
-    padding: ${p => p.theme.spacing(1)} ${p => p.theme.spacing(3)};
+    padding: ${p => p.theme.spacing(1)} ${p => p.theme.spacing(2)};
     border: none;
     border-radius: ${p => p.theme.radius.md};
     color: ${p => p.theme.colors.background};

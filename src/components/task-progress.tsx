@@ -28,9 +28,10 @@ const Fill = styled.div`
 `;
 
 const Label = styled.p`
-  font-size: 14px;
-  color: #333;
-  margin: 0;
+  font-size: ${p => p.theme.font.size.sm};
+  color: ${(p) => p.theme.colors.textMuted};
+  margin-top: 8px;
+  text-align: center;
 `;
 
 export default function ProgressBar({ percent }: ProgressBarProps) {
