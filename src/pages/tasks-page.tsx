@@ -37,7 +37,7 @@ export function TasksPage() {
   }
 
   function handleEdit(taskTemp: Task) {
-    console.log(taskTemp);
+    // console.log(taskTemp);
 
     let editTask = taskTemp;
 
@@ -69,7 +69,7 @@ export function TasksPage() {
   }
 
   function handleClose() {
-    console.log("close");
+    // console.log("close");
     setEditingTask(null);
   }
 
@@ -180,8 +180,9 @@ export function TasksPage() {
           {completed}
         </p>
 
-        <TrimButton text="Отчистить выполненные" onClick={trimCompletedTask} />
-      </SortRow>
+        <TrimButton text="Очистить выполненные" onClick={trimCompletedTask} />
+      </SortRow> 
+      
 
       {editingTask && (
         <TaskModal
@@ -192,5 +193,7 @@ export function TasksPage() {
       )}
     </MainDiv>
   );
-}
-1;
+};
+
+
+// 177 стр сделать отдельным компонентом

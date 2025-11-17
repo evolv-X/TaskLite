@@ -1,7 +1,7 @@
 import type { Task } from "../entitites/task";
 
 export function saveTasks(tasks: Task[]): void {
-  console.log(tasks);
+  // console.log(tasks);
   localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
